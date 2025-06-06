@@ -12,6 +12,8 @@ const ProfilePage = lazy(() => import('./pages/Profile/Profile'));
 const NotFoundPage = lazy(() => import('./pages/NotFound/NotFound'));
 
 const AppRoutes: React.FC = () => {
+  const basename = process.env.PUBLIC_URL || '/';
+  
   return (
     <Suspense fallback={<div>Загрузка...</div>}>
       <Routes>
