@@ -1,0 +1,44 @@
+/* App.scss — глобальные стили */
+@use 'variables' as *;
+
+// Базовые стили для всего приложения
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-primary;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: $text-color;
+}
+
+// Сброс стилей для ссылок
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    outline: none;
+  }
+}
+
+// Безопасный класс для "не-ссылок"
+a.no-link-style,
+a.no-link-style:hover,
+a.no-link-style:visited {
+  text-decoration: none;
+  color: inherit;
+  cursor: default;
+}
+
+// Убираем курсор-показатель интерактивности у неподходящих элементов
+h1, h2, h3, h4, h5, h6,
+p, label, span, li {
+  cursor: default;
+}

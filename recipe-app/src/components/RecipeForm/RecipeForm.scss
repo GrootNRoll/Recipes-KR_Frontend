@@ -1,0 +1,369 @@
+@use '../../assets/styles/variables' as *;
+@use "sass:color";
+
+.recipe-form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.65);
+  border-radius: 8px;
+
+  input, textarea, select {
+    user-select: text;
+    color: $text-color;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 0.5rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid $primary-color;
+      border-radius: 4px;
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    input[type="number"] {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: textfield;
+    }
+
+    select {
+      background-color: rgba(0, 0, 0, 0.65);
+      font-family: inherit;
+    }
+
+    select:focus,
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: color.adjust($primary-color, $lightness: +10%);
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  /* --- Стили для краткого описания --- */
+  .recipe-description {
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: color.adjust($text-color, $lightness: +30%); 
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+  /* --- Блок шагов --- */
+  .steps-container {
+    margin: 2rem 0;
+  }
+
+  .step {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .step:hover {
+    background-color: rgba(0, 0, 0, 0.65);
+  }
+
+  .step-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+
+    h4 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .remove-step {
+      background-color: #ff4d4d;
+      border: none;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #e64a4a;
+      }
+    }
+  }
+
+  /* --- Поля ввода внутри шага --- */
+  .step-fields {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 0.5rem;
+
+    textarea {
+      grid-column: span 3;
+      min-height: 60px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+    }
+
+    input[type="text"] {
+      width: 100%;
+    }
+  }
+
+  textarea,
+  input[type="text"],
+  input[type="number"],
+  select {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid $primary-color;
+    border-radius: 4px;
+    color: $text-color;
+  }
+
+  textarea {
+    min-height: 80px;
+  }
+
+  /* --- Кнопки формы --- */
+  .add-step,
+  .add-ingredient {
+    background-color: $primary-color;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: color.adjust($primary-color, $lightness: +10%);
+    }
+  }
+
+  .submit-button {
+    background-color: $secondary-color;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 2rem;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 1.1rem;
+    position: relative;
+    z-index: 1;
+
+    &:hover:not(:disabled) {
+      background-color: color.adjust($secondary-color, $lightness: +10%);
+      transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background-color: #666;
+    }
+
+    &:focus {
+      outline: 2px solid $primary-color;
+      outline-offset: 2px;
+    }
+  }
+
+  /* --- Дополнительные стили для новых полей --- */
+  .step-fields {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 0.5rem;
+
+    .step-textarea {
+      grid-column: 1 / -1;
+      min-height: 60px;
+    }
+
+    .step-duration {
+      width: 100%;
+      text-align: center;
+    }
+
+    .step-note {
+      grid-column: 3 / -1;
+    }
+  }
+
+  .step-time-label {
+    font-size: 0.8rem;
+    color: color.adjust($text-color, $alpha: -0.2);
+    margin-bottom: 0.5rem;
+  }
+
+  .step-description {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-left: 2px solid $primary-color;
+    font-size: 0.9rem;
+    color: color.adjust($text-color, $lightness: +10%);
+  }
+}
+
+/* --- Редактирование ингредиентов --- */
+.ingredient-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  align-items: center;
+  input {
+    flex: 1;
+    padding: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid $primary-color;
+    border-radius: 4px;
+    color: $text-color;
+  }
+
+  input:nth-child(1) {
+    flex: 2; 
+  }
+
+  input:nth-child(2) {
+    max-width: 40px; 
+    text-align: center;
+  }
+
+  input:nth-child(3) {
+    max-width: 160px; 
+  }
+  .remove-ingredient {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #ff4d4d;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #ff1a1a;
+    }
+  }
+}
+/* --- Скрыть spinner у всех number-полей --- */
+input[type="number"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: textfield; /* Для Firefox */
+  padding-right: 0.5rem;
+}
+
+/* Можно дополнительно стилизовать, чтобы не выглядело "голым" */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+} 
+
+.image-preview-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+.image-preview {
+  max-width: 150px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+  border: 1px solid #444;
+}
+
+.remove-image {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0.3rem 0.5rem;
+
+  &:hover {
+    background: #e64a4a;
+  }
+}
+
+/* Улучшаем внешний вид select */
+select {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: #1e1e1e;
+  border: 1px solid $primary-color;
+  border-radius: 4px;
+  color: $text-color;
+  font-size: 1rem;
+
+  &:focus {
+    outline: none;
+    border-color: color.adjust($primary-color, $lightness: +10%);
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  /* Для Firefox — убираем белый фон по умолчанию */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1.2rem auto;
+}
+
+
+
+.form-group select,
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid $primary-color;
+  border-radius: 4px;
+  color: $text-color;
+
+  &:focus {
+    outline: none;
+    border-color: color.adjust($primary-color, $lightness: +10%);
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+}

@@ -1,0 +1,14 @@
+@use '../../assets/styles/variables' as *;
+
+
+.new-recipe-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  h2 {
+    margin-bottom: 1.5rem;
+    color: $primary-color;
+    cursor: default; 
+  }
+}

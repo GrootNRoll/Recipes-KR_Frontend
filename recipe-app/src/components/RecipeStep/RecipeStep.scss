@@ -1,0 +1,87 @@
+@use '../../assets/styles/variables' as *;
+@use "sass:color";
+
+.recipe-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+.recipe-step.active {
+  border: 1px solid $primary-color;
+  background-color: rgba(0, 0, 0, 0.65);
+}
+
+.step-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .step-number {
+    min-width: 30px;
+    font-weight: bold;
+  }
+
+  .step-time {
+    width: 50px;
+    color: $primary-color;
+    font-family: monospace;
+    margin-right: 1rem;
+  }
+
+  .step-text {
+    flex: 1;
+  }
+
+  .step-arrow {
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    color: #aaa;
+  }
+}
+
+.step-description {
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  margin-top: 0.5rem;
+  border-top: 1px solid #444;
+}
+
+/* Бегущая полоска по верхнему краю */
+.recipe-step.active.running .step-header::before {
+  content: '';
+  box-shadow: 0 0 5px $primary-color;
+  position: absolute;
+  top: -17px;
+  left: -50px; /* начинаем за пределами слева */
+  width: 90px; /* длина светящейся полоски */
+  height: 2.5px;
+  background: linear-gradient(
+    to right,
+    $primary-color,
+    color.adjust($primary-color, $alpha: -0.5)
+  );
+  animation: running-light-stripes 1.5s linear infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Анимация бегущей полоски */
+@keyframes running-light-stripes {
+  0% { left: -0px; }     /* старт вне левой границы */
+  100% { left: calc(100% - 80px); } /* финиш вне правой границы */
+}
+
